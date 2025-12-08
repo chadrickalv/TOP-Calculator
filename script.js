@@ -7,11 +7,15 @@ function subtract(a, b){
 };
 
 function multiply(a, b){
-    return a*b
+    return a * b
 }
 
 function divide (a, b) {
     return b===0 ? 'ERR, Not divisible by 0' : a/b
+}
+
+function operate(op, a, b){
+
 }
 
 console.log(add(2,3))
