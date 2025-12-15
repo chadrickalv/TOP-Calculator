@@ -5,71 +5,65 @@
 body {
     display: flex;
     justify-content: center;
-
+    border: 2px red solid;
+    height: 750px;
+    padding: 10px;
 }
 
 .container {
     display: flex;
-    border: 2px, solid, black;
     justify-content: center;
+    align-items: flex-start;
+    border: 2px, solid, black;
     border-radius: 5px;
-    flex-wrap: wrap;
-    max-width: 150px;
-    flex-direction: column-reverse;
+    padding: 20px 10px;
+    height: 400px;
+    width: auto;
+}
 
+
+.nums{
+    display:flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px 20px;
+    max-width: 220px;
+}
+
+.nums button {
+    border-radius: 25px;
+    background-color: rgb(84, 84, 84);
+    color: white;
+    font-size: 25px;
+    height: 50px;
+    width: 50px;
 }
 
 .symbols{
-    border: 2px,solid,black;
-    align-self: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     flex-wrap: wrap;
-  
+    gap: 10px;
+    max-width: 100px;
 }
 
-.nums{
-    border: 2px,solid,black;
-    align-self: flex-start;
-    max-width: 150px;
-    flex-wrap: wrap;
-
+.btn-c{
+    order: -1;
 }
 
-button{
-    border-radius: 20px;
-    background-color: lightgreen;
+
+.symbols button{
+    border-radius: 25px;
     font-size: 25px;
+    height: 50px;
+    width: 50px;
+    background-color: orange;
+    color: aliceblue;
 }
+
 
 button:hover{
     transform: scale(1.2);
     transition: .2s;
-}
-
-.symbols{
-    display:flex;
-    flex-direction: row-reverse;
-    
-}
-
-.symbols button:hover{
-    background-color: lightblue;
-    color: aliceblue;
-}
-
-.symbols .btn-c:hover{
-    background-color: violet;
-    color: aliceblue;
-}
-
-.nums button:hover{
-    background-color: darkgreen;
-    color:aliceblue;
-}
-
-.btn-mn,.btn-p,.btn-m,.btn-d,.btn-e{
-    background-color: lightcoral;
-}
-
-.btn-c{
-    background-color:rgb(255, 255, 149);
 }
