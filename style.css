@@ -4,3 +4,23 @@
 to properly create good layouts 
 
 */
+
+
+
+.container {
+    display:flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid black;
+}
+
+.nums{
+    border:2px solid black;
+    gap:10px;
+}
+
+.symbols{
+    border: 2px solid black;
+    gap:8px;
+}
