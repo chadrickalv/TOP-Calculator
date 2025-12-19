@@ -22,6 +22,7 @@ body{
     background-color: rgba(0, 0, 0, 0.854);
     padding: 10px 10px;
     border-radius: 15px;
+    margin-top: 80px;
 }
 
 .nums{
@@ -74,18 +75,24 @@ body{
 }
 
 
-
 .display{
     border: 1px solid rgb(133, 133, 133);
     width: 170px;
+    height: 23px;
     border-radius: 15px;
     font-size: 20px;
     padding: 5px;
     overflow: auto;
     text-align: right;
     color: white;
+    flex-shrink: 0;
 }
 
+
+button:hover{
+    transition: .75ms;
+    color: rgb(132, 0, 255)
+}
 
 
 /* 
