@@ -5,25 +5,88 @@ to properly create good layouts
 
 */
 
-
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
 
 .container {
     display:flex;
-    gap: 30px;
+    flex-direction: row;
     justify-content: center;
-    align-items: center;
     border: 3px solid black;
+    flex-shrink: 0;
+    background-color: rgba(0, 0, 0, 0.854);
+    padding: 10px 10px;
+    border-radius: 15px;
 }
 
 .nums{
-    border:2px solid black;
-    gap:10px;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    flex-basis: 0;
+    display: flex;
+    gap: 5px;
+    align-items: flex-start;
+    flex-shrink: 0;
+    justify-content: center;
+    padding-top: 10px;
+
 }
 
-.symbols{
+
+.nums button{
     border: 2px solid black;
-    gap:8px;
+    border-radius: 40%;
+    padding: 5px 20px;
+    font-size: 20px;
+    color: white;
+    background-color: rgba(101, 101, 101, 0.41);
 }
+
+.nums .btn-e{
+    background: lightblue;
+}
+
+
+
+.symbols{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 5px;
+    flex-shrink: 0;
+    padding-top: 10px;
+    margin-left: 5px;
+}
+
+.symbols button{
+    border: 2px solid black;
+    border-radius: 40%;
+    padding: 5px 12px;
+    font-size: 20px;
+    color: white;
+    background-color: rgba(101, 101, 101, 0.52);
+}
+
+
+
+.display{
+    border: 1px solid rgb(133, 133, 133);
+    width: 170px;
+    border-radius: 15px;
+    font-size: 20px;
+    padding: 5px;
+    overflow: auto;
+    text-align: right;
+    color: white;
+}
+
+
 
 /* 
 finished off creating borders.

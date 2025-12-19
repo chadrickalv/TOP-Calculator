@@ -22,14 +22,19 @@ console.log(add(2,3))
 console.log(multiply(3,0))
 console.log(divide(3,0))
 
+let currentInput = '';
+
 //functions to populate the display with the digit numbers on click
 const display = document.querySelector('.display')
 const numsButton = document.querySelectorAll('.nums button');
 numsButton.forEach(button => {
     button.addEventListener('click', () => {
-        display.textContent += button.textContent;
+        currentInput += button.textContent;
+        display.textContent = currentInput;
+        display.scrollLeft = display.scrollWidth
     })
 });
+
 
 /* 
 finished displaying. 
