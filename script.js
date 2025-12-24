@@ -1,24 +1,3 @@
-function add(a, b) {
-    return a + b 
-};
-
-function subtract(a, b){
-    return a - b
-};
-
-function multiply(a, b){
-    return a * b
-}
-
-function divide (a, b) {
-    return b===0 ? 'ERR, Not divisible by 0' : a/b
-}
-
-
-console.log(add(2,3))
-console.log(multiply(3,0))
-console.log(divide(3,0))
-
 //function that will be called when the user clicks on '='
 function operate (a, b, op) {
     switch (op){
@@ -33,7 +12,6 @@ function operate (a, b, op) {
     }
 }
 
-
 let currentInput = '';
 let firstNumber = null;
 let operator = null;
@@ -41,18 +19,32 @@ let result = null;
 
 //functions to populate the display with the digit numbers on click
 const display = document.querySelector('.display')
-const numsButton = document.querySelectorAll('.nums button:not(.equals)');
+const numsButton = document.querySelectorAll('.nums button:not(.equals):not(.period)');
 numsButton.forEach(button => {
     button.addEventListener('click', () => {
         if (currentInput === '' || currentInput === '0'){
             currentInput = button.textContent //replace the 0
-        } else {
+        }  else {
             currentInput += button.textContent; //append numbers normally
         }
         display.textContent = currentInput;
         display.scrollLeft = display.scrollWidth
     })
 });
+
+//decimal logic
+const decimal = document.querySelector('.period')
+decimal.addEventListener('click', () => {
+    if (currentInput.includes('.')){
+        return
+    } else if (currentInput == '' || currentInput == '0'){
+        currentInput = '0.';
+    } else {
+        currentInput += '.'
+    }
+    display.textContent = currentInput;
+    display.scrollLeft = display.scrollWidth;
+})
 
 
 const symbolsButton = document.querySelectorAll('.symbols button')
@@ -77,7 +69,9 @@ symbolsButton.forEach(symbolsbtn => {
 
 const equalsButton = document.querySelector('.equals')
 equalsButton.addEventListener('click', () => {
-
+        if (firstNumber === null || operator === null || currentInput === ''){
+            return
+        }
         secondNumber = parseFloat(currentInput)
         result = operate(firstNumber, secondNumber, operator)
         currentInput = result;
@@ -89,84 +83,100 @@ equalsButton.addEventListener('click', () => {
 
 //clear button logic
 const clearButton = document.querySelector('.clear');
+let lastClickTime = 0;
+const doubleTap = 300;
+
 clearButton.addEventListener('click', () => {
+    const now = Date.now();
+
+    if (now - lastClickTime < doubleTap){
     firstNumber = null;
     operator = null;
     currentInput = '';
     result = null;
     display.textContent = '0';
+    } else {
+        if(currentInput.length > 0) {
+            currentInput = currentInput.slice(0,-1);
+            display.textContent = currentInput || '0';
+        }
+    }
+    lastClickTime = now;
 });
 
 
-/* logic to make the display into string 
-inputs of numbers which will then all be combined when 
-'=' is pressed (input: 1+1+1+1; press -> '='; output: 4;)
+//Keyboard interactive
 
-const symbolsButton = document.querySelectorAll('.symbols button')
-symbolsButton.forEach(symbolsbtn => {
-    symbolsbtn.addEventListener('click', () => {
-        if (firstNumber == null){
-        firstNumber = currentInput
-        operator = symbolsbtn.textContent
-        currentInput = ''
-        display.textContent += symbolsbtn.textContent
-        } else if (firstNumber !== null){
-            secondNumber = currentInput
-            operator = symbolsbtn.textContent
+document.addEventListener('keydown', (e) => {
+    const key = e.key;
+
+    if (!isNaN(key)) {
+        if (currentInput === '' || currentInput === '0'){
+            currentInput = key;
+        } else {
+            currentInput += key;
+        }
+        display.textContent = currentInput;
+
+// operators
+    } else if (['+', '-', '*', '/'].includes(key)) {
+        if (firstNumber === null) {
+            firstNumber = parseFloat(currentInput);
+            operator = key;
+            currentInput = '';
+        } else if (currentInput !== '') {
+            secondNumber = parseFloat(currentInput);
+            result = operate(firstNumber, secondNumber, operator);
+            firstNumber = result;
+            operator = key;
+            currentInput = '';
+            display.textContent = firstNumber;
+        } else {
+            operator = key
+        }
+
+// decimal
+    } else if (key === '.') {
+        if (currentInput.includes('.')){
+        return
+        } else if (currentInput == '' || currentInput == '0') {
+        currentInput = '0.';
+        } else {
+        currentInput += '.'
+        }
+        display.textContent = currentInput;
+        display.scrollLeft = display.scrollWidth;
+
+// equals
+    } else if (key === 'Enter') {
+        if (firstNumber === null || operator === null || currentInput === ''){
+            return
+        }
+            secondNumber = parseFloat(currentInput);
+            result = operate(firstNumber, secondNumber, operator);
+            firstNumber = result;
             currentInput = ''
-            display.textContent += symbolsbtn.textContent
-        } 
-    })
-})
-
-*/
-
-/* 
-added variable content holder
-missing: 
--   operator functionality
-
-switch (browser) {
-  case 'Edge':
-    alert( "You've got the Edge!" );
-    break;
-
-  case 'Chrome':
-  case 'Firefox':
-  case 'Safari':
-  case 'Opera':
-    alert( 'Okay we support these browsers too' );
-    break;
-
-  default:
-    alert( 'We hope that this page looks ok!' );
-}
-
-const browser = ''
-if (browser === 'Edge'){
-    console.log("You've got the Edge!");
-} else if (browser == 'Chrome'
- || browser == 'Firefox'
- || browser == 'Safari'
- || browser == 'Opera'){
-     console.log('Okay we support these browsers too.')//you can also use 'alert' instead of console.log
-} else {
-    console.log('We hope that this page looks ok!')
-}
+            display.textContent = result;
 
 
-let a = +prompt('a?', '');
+// clear
+    } else if (key === 'Backspace') {
+        const now = Date.now();
 
-switch(a) {
-case 0:
-    alert( 0 );
-    break;
-case 1:
-    alert ( 1 );
-    break;
-case 2:
-case 3:
-    alert ( '2,3' );
-    break;
-}
-*/
+    if (now - lastClickTime < doubleTap){
+    firstNumber = null;
+    operator = null;
+    currentInput = '';
+    result = null;
+    display.textContent = '0';
+    } else {
+        if (currentInput.length > 0) {
+            currentInput = currentInput.slice(0 , -1);
+            display.textContent = currentInput || '0';
+        }
+    }
+    lastClickTime = now;
+
+    e.preventDefault();
+    }
+});
