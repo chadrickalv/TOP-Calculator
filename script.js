@@ -29,7 +29,7 @@ function operate (a, b, op) {
         case '*':
             return a * b;
         case '/':
-            return b===0 ? 'ERR, Not divisible by 0' : a/b    
+            return b===0 ? 'ERR' : a/b    
     }
 }
 
@@ -82,7 +82,6 @@ equalsButton.addEventListener('click', () => {
         result = operate(firstNumber, secondNumber, operator)
         currentInput = result;
         display.textContent = result;
-        display.scrollLeft = display.scrollWidth
 })
 
 
